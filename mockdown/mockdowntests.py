@@ -526,7 +526,6 @@ class MockdownTests(unittest.TestCase):
 </table><br/>
 ''', output)
 
-    @unittest.skip
     def test_disabled_table(self):
         output = self.mock('''
 - table:
@@ -585,7 +584,6 @@ class MockdownTests(unittest.TestCase):
     <td>Welcome cofee</td>
     <td>Cofee break (manhã)</td>
     <td>Cofee break (tarde)</td>
-    <td>Actions</td>
   </thead>
   <tr>
     <td>10/fev (quarta)</td>
@@ -604,7 +602,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="CT, 10"/><br/>
 </div>
 </td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
   <tr>
     <td>11/fev (quinta)</td>
@@ -623,7 +620,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="CT, 11"/><br/>
 </div>
 </td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
   <tr>
     <td>12/fev (sexta)</td>
@@ -642,7 +638,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="CT, 12"/><br/>
 </div>
 </td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
 </table><br/>
 ''')
