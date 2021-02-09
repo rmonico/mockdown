@@ -54,7 +54,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="A text field"/><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_text(self):
         output = self.mock('''
 - text:
@@ -68,7 +67,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="A text field" disabled readonly/><br/>
 ''')
 
-    @unittest.skip
     def test_no_placeholder_text(self):
         output = self.mock('''
 - text:
@@ -80,7 +78,6 @@ class MockdownTests(unittest.TestCase):
 <input/><br/>
 ''')
 
-    @unittest.skip
     def test_no_label_text(self):
         output = self.mock('''
 - text:
@@ -91,7 +88,6 @@ class MockdownTests(unittest.TestCase):
 <input placeholder="The placeholder"/><br/>
 ''')
 
-    @unittest.skip
     def test_finder(self):
         output = self.mock('''
 - finder:
@@ -103,7 +99,6 @@ class MockdownTests(unittest.TestCase):
 <span>A finder</span><input placeholder="A finder field prototype"/> <img src="./open-iconic/svg/magnifying-glass.svg" height=18 width=18/><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_finder(self):
         output = self.mock('''
 - finder:
@@ -116,7 +111,6 @@ class MockdownTests(unittest.TestCase):
 <span>A finder</span><input placeholder="A finder field prototype" disabled readonly/> <img src="./open-iconic/svg/magnifying-glass.svg" height=18 width=18/><br/>
 ''')
 
-    @unittest.skip
     def test_select(self):
         output = self.mock('''
 - select:
@@ -135,7 +129,6 @@ class MockdownTests(unittest.TestCase):
 </select><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_select(self):
         output = self.mock('''
 - select:
