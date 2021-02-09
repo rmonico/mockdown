@@ -264,28 +264,24 @@ class MockdownTests(unittest.TestCase):
     <td>Name</td>
     <td>Idade</td>
     <td>Cargo</td>
-    <td>Actions</td>
   </thead>
   <tr>
     <td>1</td>
     <td>Alberto</td>
     <td>30</td>
     <td>Almoxarifado</td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
   <tr>
     <td>2</td>
     <td>Gilberto</td>
     <td>27</td>
     <td>Porteiro</td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
   <tr>
     <td>3</td>
     <td>Roberto</td>
     <td>32</td>
     <td>Gerente</td>
-    <td> <img src="./open-iconic/svg/delete.svg" height=18 width=18/></td>
   </tr>
 </table><br/>
 ''')
