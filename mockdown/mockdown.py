@@ -401,7 +401,7 @@ class MockGenerator(object):
 
     def _span(self, label):
         if label:
-            self._w(f'<span>{label}</span><br/>')
+            self._w(f'<span>{label}</span>')
 
     def _input(self, enabled, placeholder):
         self._w('<input')
