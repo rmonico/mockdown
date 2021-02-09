@@ -392,8 +392,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<span>Textarea prototype</span><br/>
-<textarea rows=4 cols=50 placeholder="Optional placeholder"></textarea><br/>
+<span>Textarea prototype</span><textarea rows=4 cols=50 placeholder="Optional placeholder"></textarea><br/>
 ''')
 
     @unittest.skip
