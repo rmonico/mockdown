@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import logger_factory
-import threading
 import sys
 import yaml
 from extract_params_from_yaml import extract_params_from_yaml
@@ -103,7 +102,6 @@ checker = ArgsChecker()
 
 
 class MockGenerator(object):
-    _lock = threading.RLock()
 
     def __init__(self, input, output):
         self._in = input
