@@ -286,7 +286,6 @@ class MockdownTests(unittest.TestCase):
 </table><br/>
 ''')
 
-    @unittest.skip
     def test_button(self):
         output = self.mock('''
 - button:
@@ -297,7 +296,6 @@ class MockdownTests(unittest.TestCase):
 <input type="button" value="OK"/><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_button(self):
         output = self.mock('''
 - button:
@@ -309,7 +307,6 @@ class MockdownTests(unittest.TestCase):
 <input type="button" value="OK" disabled/><br/>
 ''')
 
-    @unittest.skip
     def test_container(self):
         output = self.mock('''
 - container:
@@ -330,7 +327,6 @@ class MockdownTests(unittest.TestCase):
 </fieldset><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_container(self):
         output = self.mock('''
 - container:
@@ -352,7 +348,6 @@ class MockdownTests(unittest.TestCase):
 </fieldset><br/>
 ''')
 
-    @unittest.skip
     def test_titleless_container(self):
         output = self.mock('''
 - container:
@@ -371,7 +366,6 @@ class MockdownTests(unittest.TestCase):
 </div><br/>
 ''')
 
-    @unittest.skip
     def test_vertical_container(self):
         output = self.mock('''
 - container:
@@ -390,7 +384,6 @@ class MockdownTests(unittest.TestCase):
 </div><br/>
 ''')
 
-    @unittest.skip
     def test_textarea(self):
         output = self.mock('''
 - textarea:
