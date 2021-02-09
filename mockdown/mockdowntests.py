@@ -171,7 +171,6 @@ class MockdownTests(unittest.TestCase):
 <input type="checkbox" checked="True" disabled readonly> A checked checkbox</input><br/>
 ''')
 
-    @unittest.skip
     def test_multipleselect(self):
         output = self.mock('''
 - multipleselect:
@@ -231,7 +230,6 @@ class MockdownTests(unittest.TestCase):
 </table><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_multipleselect(self):
         output = self.mock('''
 - multipleselect:
