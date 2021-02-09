@@ -407,7 +407,6 @@ class MockdownTests(unittest.TestCase):
 <span>Textarea prototype</span><textarea rows=4 cols=50 placeholder="Optional placeholder" disabled readonly></textarea><br/>
 ''')
 
-    @unittest.skip
     def test_table(self):
         output = self.mock('''
 - table:

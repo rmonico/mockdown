@@ -261,7 +261,7 @@ class MockGenerator(object):
         if not enabled:
             self._w(' disabled readonly')
 
-        self._w(f'> {label}</input>')
+        self._w(f'> {label}</input>' if label else '/>')
 
         # self._span(label)
         if br:
