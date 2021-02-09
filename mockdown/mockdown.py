@@ -144,18 +144,18 @@ class MockGenerator(object):
 
     def _generate_fields(self, fields, container=False, **default_kwargs):
         for field in fields:
-            if container:
-                self._wn('<div class="container">')
-                self._wn('  <div class="row">')
-                self._wn('    <div class="col-md-8">')
+            # if container:
+            #     self._wn('<div class="container">')
+            #     self._wn('  <div class="row">')
+            #     self._wn('    <div class="col-md-8">')
 
             self._generate_field(field, default_kwargs)
 
-            if container:
-                self._wn('    </div>')
-                self._wn('  </div>')
-                self._wn('</div>')
-                self._wn('<br/>')
+            # if container:
+            #     self._wn('    </div>')
+            #     self._wn('  </div>')
+            #     self._wn('</div>')
+            #     self._wn('<br/>')
 
     def _generate_field(self, field, kwargs_defaults={}):
         fieldKinds = {
