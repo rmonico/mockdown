@@ -42,7 +42,6 @@ class MockdownTests(unittest.TestCase):
 <span>Free text</span><br/>
 ''')
 
-    @unittest.skip
     def test_text(self):
         output = self.mock('''
 - text:
