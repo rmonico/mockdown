@@ -129,14 +129,28 @@ class MockGenerator(object):
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
-<body>'''
+<body>
+  <div class="container">
+'''
 
-    footer = '''</body>
+    footer = '''
+  </div>
+  <br/>
+</body>
 </html>
 '''
 
+    container_header = '''
+    <div class="row">
+      <div class="col-md-8">
+'''
+
+    container_footer = '''      </div>
+    </div>
+'''
+
     def generate(self):
-        self._wn(MockGenerator.header)
+        self._w(MockGenerator.header)
 
         self._generate_fields(self._in, True)
 
@@ -144,18 +158,13 @@ class MockGenerator(object):
 
     def _generate_fields(self, fields, container=False, **default_kwargs):
         for field in fields:
-            # if container:
-            #     self._wn('<div class="container">')
-            #     self._wn('  <div class="row">')
-            #     self._wn('    <div class="col-md-8">')
+            if container:
+                self._w(MockGenerator.container_header)
 
             self._generate_field(field, default_kwargs)
 
-            # if container:
-            #     self._wn('    </div>')
-            #     self._wn('  </div>')
-            #     self._wn('</div>')
-            #     self._wn('<br/>')
+            if container:
+                self._w(MockGenerator.container_footer)
 
     def _generate_field(self, field, kwargs_defaults={}):
         fieldKinds = {

@@ -18,9 +18,18 @@ class MockdownTests(unittest.TestCase):
 
         output = output.removeprefix(MockGenerator.header)
 
+        self.assertTrue(output.startswith(MockGenerator.container_header))
+
+        output = output.removeprefix(MockGenerator.container_header)
+
         self.assertTrue(output.endswith(MockGenerator.footer))
 
-        return output.removesuffix(MockGenerator.footer)
+        output = output.removesuffix(MockGenerator.footer)
+
+        self.assertTrue(output.endswith(MockGenerator.container_footer))
+
+        # Insert this \n to easy test readibility
+        return f'\n{output.removesuffix(MockGenerator.container_footer)}'
 
     def mock(self, input):
         entry = yaml.load(input, Loader=yaml.FullLoader)
