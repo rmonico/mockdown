@@ -159,7 +159,6 @@ class MockdownTests(unittest.TestCase):
 <input type="checkbox" checked="True"> A checked checkbox</input><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_check(self):
         output = self.mock('''
 - check:
@@ -169,7 +168,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<input type="checkbox" checked="True" disabled readonly/><span>A checked checkbox</span><br/>
+<input type="checkbox" checked="True" disabled readonly> A checked checkbox</input><br/>
 ''')
 
     @unittest.skip
