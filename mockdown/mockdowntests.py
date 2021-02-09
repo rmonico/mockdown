@@ -647,14 +647,3 @@ class MockdownTests(unittest.TestCase):
   </tr>
 </table><br/>
 ''')
-
-#     def test_align(self):
-#         output = self.mock('''
-# - span:
-#     label: Free text
-# ''')
-
-#         self.assertEqual(output, '''
-# <span>Free text</span> <br/>
-# ''')
-
