@@ -1,0 +1,110 @@
+- span:
+    label: Free text
+    _comment: _comments field are ignored
+    _comment: 'Tip: extract openiconic to this folder (https://useiconic.com/open)'
+
+- text:
+    label: Text field
+    placeholder: A text field
+
+- text:
+    label: Text sem placeholder
+
+- finder:
+    label: A finder
+    placeholder: A finder field prototype
+
+- select:
+    label: Select prototype
+    options:
+        - A option
+        - Another option
+        - A third option
+
+- check:
+    label: A checked checkbox
+    checked: true
+
+- multipleselect:
+    label: Multiple selection field
+    placeholder: Type to select a value
+    columns:
+        ID:
+            - 1
+            - 2
+            - 3
+        Name:
+            - Alberto
+            - Gilberto
+            - Roberto
+        Idade:
+            - 30
+            - 27
+            - 32
+        Cargo:
+            - Almoxarifado
+            - Porteiro
+            - Gerente
+
+- button:
+    text: OK
+
+- container:
+    - _kwargs:
+        direction: horizontal
+        title: Group of buttons
+    - button:
+        text: OK
+    - button:
+        text: Cancelar
+
+- textarea:
+    label: Textarea prototype
+    placeholder: Optional placeholder
+
+- table:
+    title: A table
+    columns:
+        Data:
+            - 10/fev (quarta)
+            - 11/fev (quinta)
+            - 12/fev (sexta)
+        Welcome cofee:
+            - container:
+                - check:
+                - text:
+                    placeholder: hh:mm
+            - container:
+                - check:
+                - text:
+                    placeholder: hh:mm
+            - container:
+                - check:
+                - text:
+                    placeholder: hh:mm
+        Cofee break (manhã):
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
+        Cofee break (tarde):
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
+          - container:
+            - check:
+            - text:
+                placeholder: hh:mm
