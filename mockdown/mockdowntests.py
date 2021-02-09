@@ -148,7 +148,6 @@ class MockdownTests(unittest.TestCase):
 </select><br/>
 ''')
 
-    @unittest.skip
     def test_check(self):
         output = self.mock('''
 - check:
@@ -157,7 +156,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<input type="checkbox" checked="True"/><span>A checked checkbox</span><br/>
+<input type="checkbox" checked="True"> A checked checkbox</input><br/>
 ''')
 
     @unittest.skip
