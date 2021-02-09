@@ -395,7 +395,6 @@ class MockdownTests(unittest.TestCase):
 <span>Textarea prototype</span><textarea rows=4 cols=50 placeholder="Optional placeholder"></textarea><br/>
 ''')
 
-    @unittest.skip
     def test_disabled_textarea(self):
         output = self.mock('''
 - textarea:
@@ -405,8 +404,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<span>Textarea prototype</span><br/>
-<textarea rows=4 cols=50 placeholder="Optional placeholder" disabled readonly></textarea><br/>
+<span>Textarea prototype</span><textarea rows=4 cols=50 placeholder="Optional placeholder" disabled readonly></textarea><br/>
 ''')
 
     @unittest.skip
