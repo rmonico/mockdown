@@ -1,7 +1,7 @@
 from setuptools import setup
 
-setup(name='iTask',
-      version='0.3.2',
+setup(name='Mockdown',
+      version='0.0.1',
       description='Creates wireframe mocks converting yaml files to HTML',
       url='https://github.com/rmonico/mockdown',
       author='Rafael Monico',
@@ -9,6 +9,6 @@ setup(name='iTask',
       license='GPL3',
       packages=['mockdown'],
       entry_points={
-          'console_scripts': ['mockdown=mockdown:main'],
+          'console_scripts': ['mockdown=mockdown.mockdown:main'],
       },
       zip_safe=False)

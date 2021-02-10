@@ -3,7 +3,7 @@ import argparse
 import logger_factory
 import sys
 import yaml
-from extract_params_from_yaml import extract_params_from_yaml
+from . extract_params_from_yaml import extract_params_from_yaml
 
 
 def parse_command_line():
