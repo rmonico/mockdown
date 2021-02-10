@@ -149,7 +149,7 @@ class MockGenerator(object):
 '''
 
     container_footer = '''      </div>
-    </div>
+    </div><br/>
 '''
 
     def generate(self):
