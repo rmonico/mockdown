@@ -309,10 +309,11 @@ class MockGenerator(object):
         br = checker.param('br').default(True).istype(bool).get()
 
         self._span(label)
+        self._wbrn()
         if enabled:
             self._input(enabled, placeholder)
             self._img('plus')
-        self._wbrn()
+            self._wbrn()
         self._table(columns, enabled, br=br)
 
     # def _generate_button(self, text, br=True):

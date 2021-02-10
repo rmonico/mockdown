@@ -229,7 +229,8 @@ class MockdownTests(unittest.TestCase):
 
         self.maxDiff = 9999
         self.assertEqual(output, '''
-<span>Multiple selection field</span><input placeholder="Type to select a value"/> <img src="./open-iconic/svg/plus.svg" height=18 width=18/><br/>
+<span>Multiple selection field</span><br/>
+<input placeholder="Type to select a value"/> <img src="./open-iconic/svg/plus.svg" height=18 width=18/><br/>
 <table>
   <thead>
     <td>ID</td>
