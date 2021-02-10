@@ -302,12 +302,15 @@ class MockGenerator(object):
 
     # def _generate_button(self, text, br=True):
     def _generate_button(self, *args, **kwargs):
+        colors = {'blue': 'primary', 'green': 'success', 'yellow': 'warning', 'red': 'danger'}
         checker.reset('button', args, kwargs)
         text = checker.param('text').isNotNone().istype(str).get()
         enabled = checker.param('enabled').default(True).istype(bool).get()
+        color = checker.param('color').default('blue').istype(str).isin(*tuple(colors.keys())).get()
         br = checker.param('br').default(True).istype(bool).get()
 
-        self._w(f'<input type="button" value="{text}"')
+        secondary_class = colors[color]
+        self._w(f'<input type="button" value="{text}" class="btn btn-{secondary_class}"')
 
         if not enabled:
             self._w(' disabled')

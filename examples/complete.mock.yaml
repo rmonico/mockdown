@@ -50,13 +50,20 @@
     text: OK
 
 - container:
-    - _kwargs:
-        direction: horizontal
-        title: Group of buttons
     - button:
         text: OK
+        color: green
     - button:
         text: Cancelar
+        color: red
+
+- container:
+    - _kwargs:
+        direction: vertical
+    - span:
+        label: A vertical container
+    - span:
+        label: Without title
 
 - textarea:
     label: Textarea prototype

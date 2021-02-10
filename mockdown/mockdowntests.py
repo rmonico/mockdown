@@ -312,7 +312,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<input type="button" value="OK"/><br/>
+<input type="button" value="OK" class="btn btn-primary"/><br/>
 ''')
 
     def test_disabled_button(self):
@@ -323,7 +323,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<input type="button" value="OK" disabled/><br/>
+<input type="button" value="OK" class="btn btn-primary" disabled/><br/>
 ''')
 
     def test_container(self):
@@ -341,8 +341,8 @@ class MockdownTests(unittest.TestCase):
         self.assertEqual(output, '''
 <fieldset>
   <legend>Group of buttons</legend>
-<input type="button" value="OK"/>
-<input type="button" value="Cancelar"/>
+<input type="button" value="OK" class="btn btn-primary"/>
+<input type="button" value="Cancelar" class="btn btn-primary"/>
 </fieldset><br/>
 ''')
 
@@ -362,8 +362,8 @@ class MockdownTests(unittest.TestCase):
         self.assertEqual(output, '''
 <fieldset disabled>
   <legend>Group of buttons</legend>
-<input type="button" value="OK"/>
-<input type="button" value="Cancelar"/>
+<input type="button" value="OK" class="btn btn-primary"/>
+<input type="button" value="Cancelar" class="btn btn-primary"/>
 </fieldset><br/>
 ''')
 
@@ -380,8 +380,8 @@ class MockdownTests(unittest.TestCase):
 
         self.assertEqual(output, '''
 <div>
-<input type="button" value="OK"/>
-<input type="button" value="Cancelar"/>
+<input type="button" value="OK" class="btn btn-primary"/>
+<input type="button" value="Cancelar" class="btn btn-primary"/>
 </div><br/>
 ''')
 
@@ -398,8 +398,8 @@ class MockdownTests(unittest.TestCase):
 
         self.assertEqual(output, '''
 <div>
-<input type="button" value="OK"/><br/>
-<input type="button" value="Cancelar"/><br/>
+<input type="button" value="OK" class="btn btn-primary"/><br/>
+<input type="button" value="Cancelar" class="btn btn-primary"/><br/>
 </div><br/>
 ''')
 
