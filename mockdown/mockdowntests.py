@@ -61,6 +61,15 @@ class MockdownTests(unittest.TestCase):
 <span>Free text</span><br/>
 ''')
 
+    def test_h1_6(self):
+        output = self.mock('''
+- h1: h1 title
+''')
+
+        self.assertEqual(output, '''
+<h1>h1 title</h1><br/>
+''')
+
     def test_text(self):
         output = self.mock('''
 - text:
