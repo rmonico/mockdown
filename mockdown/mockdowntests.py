@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import unittest
 import io
-from mockdown import MockGenerator
+from . mockdown import MockGenerator
 import yaml
 
 
@@ -152,7 +152,8 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<span>Select prototype</span><select>
+<span>Select prototype</span><br/>
+<select>
   <option>A option</option>
   <option>Another option</option>
   <option>A third option</option>
@@ -171,7 +172,8 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<span>Select prototype</span><select disabled readonly>
+<span>Select prototype</span><br/>
+<select disabled readonly>
   <option>A option</option>
   <option>Another option</option>
   <option>A third option</option>

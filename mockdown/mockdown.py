@@ -263,6 +263,7 @@ class MockGenerator(object):
         br = checker.param('br').default(True).istype(bool).get()
 
         self._span(label)
+        self._wbrn()
         self._w('<select')
 
         if not enabled:

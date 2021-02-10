@@ -3,8 +3,7 @@
 base_path="$(pwd)"
 
 function genexample() {
-    pushd . &> /dev/null
-    cd "${base_path}/mockdown"
+    pushd "${base_path}/mockdown" &> /dev/null
 
     python mockdown.py ../examples/complete.mock.yaml ~/complete.html
 
@@ -12,8 +11,7 @@ function genexample() {
 }
 
 function run() {
-    pushd . &> /dev/null
-    cd "${base_path}/mockdown"
+    pushd "${base_path}/mockdown" &> /dev/null
 
     python mockdown.py "$@"
 
@@ -21,10 +19,9 @@ function run() {
 }
 
 function test() {
-    pushd . &> /dev/null
-    cd "${base_path}/mockdown"
+    pushd "${base_path}" &> /dev/null
 
-    python -m unittest mockdowntests.py
+    python -m unittest mockdown/mockdowntests.py
 
     popd
 }
