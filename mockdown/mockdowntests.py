@@ -13,14 +13,20 @@ class MockdownTests(unittest.TestCase):
     def _load(self, content):
         return yaml.load(content, Load=yaml.FullLoader)
 
-    def removeHeadersAndFooters(self, output):
+    def removeHeadersAndFooters(self, container, output):
         self.assertTrue(output.startswith(MockGenerator.header))
 
         output = output.removeprefix(MockGenerator.header)
 
-        self.assertTrue(output.startswith(MockGenerator.container_header))
+        if not container:
+            self.assertTrue(output.startswith(MockGenerator.container_header))
 
-        output = output.removeprefix(MockGenerator.container_header)
+            output = output.removeprefix(MockGenerator.container_header)
+        else:
+            self.assertTrue(output.startswith(MockGenerator.subcontainer_header))
+
+            output = output.removeprefix(MockGenerator.subcontainer_header)
+
 
         self.assertTrue(output.endswith(MockGenerator.footer))
 
@@ -31,7 +37,7 @@ class MockdownTests(unittest.TestCase):
         # Insert this \n to easy test readibility
         return f'\n{output.removesuffix(MockGenerator.container_footer)}'
 
-    def mock(self, input):
+    def mock(self, input, container=False, ):
         entry = yaml.load(input, Loader=yaml.FullLoader)
 
         with io.StringIO() as out:
@@ -39,7 +45,11 @@ class MockdownTests(unittest.TestCase):
 
             generator.generate()
 
-            return self.removeHeadersAndFooters(out.getvalue())
+            return self.removeHeadersAndFooters(container, out.getvalue())
+
+    def mock_container(self, input):
+        # TODO Remover esta flag de container, fazer de outro jeito
+        return self.mock(input, container=True, )
 
     def test_span(self):
         output = self.mock('''
@@ -317,7 +327,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_container(self):
-        output = self.mock('''
+        output = self.mock_container('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -337,7 +347,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_disabled_container(self):
-        output = self.mock('''
+        output = self.mock_container('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -358,7 +368,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_titleless_container(self):
-        output = self.mock('''
+        output = self.mock_container('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -376,7 +386,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_vertical_container(self):
-        output = self.mock('''
+        output = self.mock_container('''
 - container:
     - _kwargs:
         direction: vertical

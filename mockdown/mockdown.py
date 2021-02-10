@@ -143,6 +143,11 @@ class MockGenerator(object):
       <div class="col-md-8">
 '''
 
+    subcontainer_header = '''
+    <div class="row">
+      <div class="col-md-8 justify-content-end d-flex">
+'''
+
     container_footer = '''      </div>
     </div>
 '''
@@ -157,7 +162,11 @@ class MockGenerator(object):
     def _generate_fields(self, fields, container=False, **default_kwargs):
         for field in fields:
             if container:
-                self._w(MockGenerator.container_header)
+                if 'container' in field:
+                    # TODO Extract these component to its classes
+                    self._w(MockGenerator.subcontainer_header)
+                else:
+                    self._w(MockGenerator.container_header)
 
             self._generate_field(field, default_kwargs)
 
