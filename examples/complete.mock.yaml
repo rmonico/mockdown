@@ -1,7 +1,11 @@
-- span:
-    label: Free text
+- header:
+    label: Complete mockdown example
+    level: 1
     _comment: _comments field are ignored
     _comment: 'Tip: extract openiconic to this folder (https://useiconic.com/open)'
+
+- span:
+    label: Free text
 
 - text:
     label: Text field
