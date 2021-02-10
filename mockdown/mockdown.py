@@ -73,6 +73,11 @@ class ArgsChecker(object):
 
         return value
 
+    def is_(self, checker):
+        self._for_value(checker)
+
+        return self
+
     def isin(self, *values):
         def _isin(value):
             self._assert(value in values, f'Must be in "{values}"')
@@ -176,6 +181,7 @@ class MockGenerator(object):
     def _generate_field(self, field, kwargs_defaults={}):
         fieldKinds = {
             'span': self._generate_span,
+            'header': self._generate_header,
             'text': self._generate_text,
             'finder': self._generate_finder,
             'select': self._generate_select,
@@ -207,6 +213,14 @@ class MockGenerator(object):
         if br:
             self._wbr()
         self._wn()
+
+    def _generate_header(self, *args, **kwargs):
+        checker.reset('header', args, kwargs)
+        level = checker.param('level').default(1).istype(int).is_(lambda v: 1 <= v <= 6).get()
+        label = checker.param('label').default(None).istype(str).get()
+        br = checker.param('br').default(True).istype(bool).get()
+
+        self._wn(f'<h{level}>{label}</h{level}>{"<br/>" if br else ""}')
 
     # def _generate_text(self, label=None, placeholder=None, br=True):
     def _generate_text(self, *args, **kwargs):

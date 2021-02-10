@@ -63,11 +63,13 @@ class MockdownTests(unittest.TestCase):
 
     def test_h1_6(self):
         output = self.mock('''
-- h1: h1 title
+- header:
+    level: 3
+    label: h3 title
 ''')
 
         self.assertEqual(output, '''
-<h1>h1 title</h1><br/>
+<h3>h3 title</h3><br/>
 ''')
 
     def test_text(self):
