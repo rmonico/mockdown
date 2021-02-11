@@ -341,7 +341,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_container(self):
-        output = self.mock_container('''
+        output = self.mock('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -361,7 +361,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_disabled_container(self):
-        output = self.mock_container('''
+        output = self.mock('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -382,7 +382,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_titleless_container(self):
-        output = self.mock_container('''
+        output = self.mock('''
 - container:
     - _kwargs:
         direction: horizontal
@@ -400,7 +400,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
     def test_vertical_container(self):
-        output = self.mock_container('''
+        output = self.mock('''
 - container:
     - _kwargs:
         direction: vertical
@@ -414,6 +414,24 @@ class MockdownTests(unittest.TestCase):
 <div>
 <input type="button" value="OK" class="btn btn-primary"/><br/>
 <input type="button" value="Cancelar" class="btn btn-primary"/><br/>
+</div><br/>
+''')
+
+    def test_right_aligned_container(self):
+        output = self.mock_container('''
+- container:
+    - _kwargs:
+        align: right
+    - button:
+        text: OK
+    - button:
+        text: Cancelar
+''')
+
+        self.assertEqual(output, '''
+<div>
+<input type="button" value="OK" class="btn btn-primary"/>
+<input type="button" value="Cancelar" class="btn btn-primary"/>
 </div><br/>
 ''')
 

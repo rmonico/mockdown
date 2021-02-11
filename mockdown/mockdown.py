@@ -174,7 +174,8 @@ class MockGenerator(object):
         '''
         for field in fields:
             if container:
-                if 'container' in field:
+                # O seguinte if precisa (muito) ser extraído para uma classe de componente de container
+                if 'container' in field and field['container'][0].get('_kwargs', {}).get('align', 'left') == 'right':
                     # TODO Extract these component to its classes
                     self._w(MockGenerator.subcontainer_header)
                 else:
