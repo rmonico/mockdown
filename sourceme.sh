@@ -24,8 +24,16 @@ function test() {
     old_pwd="$(pwd)"
     cd "${base_path}"
 
-
     python -m unittest mockdown/mockdowntests.py
+
+    cd "$old_pwd"
+}
+
+function install() {
+    old_pwd="$(pwd)"
+    cd "${base_path}"
+
+    sudo pip install .
 
     cd "$old_pwd"
 }
