@@ -129,6 +129,9 @@ class MockGenerator(object):
   input[type=button], input[type=checkbox] {
     width: initial;
   }
+  fieldset {
+    padding: 15px 25px 35px 30px !important;
+  }
   </style>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
@@ -353,6 +356,9 @@ class MockGenerator(object):
         tag = 'fieldset' if title else 'div'
 
         self._w(f'<{tag}')
+
+        if title:
+            self._w(' class="border"')
 
         if not enabled:
             self._w(' disabled')

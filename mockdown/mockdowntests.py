@@ -353,7 +353,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<fieldset>
+<fieldset class="border">
   <legend>Group of buttons</legend>
 <input type="button" value="OK" class="btn btn-primary"/>
 <input type="button" value="Cancelar" class="btn btn-primary"/>
@@ -374,7 +374,7 @@ class MockdownTests(unittest.TestCase):
 ''')
 
         self.assertEqual(output, '''
-<fieldset disabled>
+<fieldset class="border" disabled>
   <legend>Group of buttons</legend>
 <input type="button" value="OK" class="btn btn-primary"/>
 <input type="button" value="Cancelar" class="btn btn-primary"/>
