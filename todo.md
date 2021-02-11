@@ -14,9 +14,17 @@
 - [ ] Fluxograma
 - [ ] value nos inputs
 - [ ] Identar html gerado
+- [ ] Fazer radio button
+
+## Bugs
+
+- [ ] Quando um container está aninhando em outro container o subcontainer não consegue ficar alinhado à direita
+- [ ] O label do checkbox não fica disabled
+- [ ] O fundo de um multiselect não fica em cor diferente, apenas o texto, talvez ainda devesse mostrar os botões em outra cor
 
 ## Componentes
 
+- Header
 - span
 - text
 - finder
