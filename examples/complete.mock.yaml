@@ -60,6 +60,7 @@
     - button:
         text: Cancelar
         color: red
+        _comment: "'color' pode ser blue (default), green, yellow ou red"
 
 - container:
     - _kwargs:
