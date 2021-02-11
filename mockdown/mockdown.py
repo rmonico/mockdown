@@ -165,6 +165,10 @@ class MockGenerator(object):
         self._w(MockGenerator.footer)
 
     def _generate_fields(self, fields, container=False, **default_kwargs):
+        '''
+        O paramêtro container se refere ao rootContainer, isto é, é True quando está gerando os fields direto no body
+        A string 'container' (como em if 'container' in field) se refere ao field do tipo container
+        '''
         for field in fields:
             if container:
                 if 'container' in field:
