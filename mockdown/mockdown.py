@@ -188,6 +188,7 @@ class MockGenerator(object):
 
     def _generate_field(self, field, kwargs_defaults={}):
         fieldKinds = {
+            'br': lambda *args, **kwargs: self._wbrn(),
             'span': self._generate_span,
             'header': self._generate_header,
             'text': self._generate_text,
