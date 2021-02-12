@@ -193,6 +193,7 @@ class MockGenerator(object):
             'text': self._generate_text,
             'finder': self._generate_finder,
             'select': self._generate_select,
+            'radio': self._generate_radio,
             'check': self._generate_check,
             'multipleselect': self._generate_multipleselect,
             'button': self._generate_button,
@@ -283,6 +284,27 @@ class MockGenerator(object):
             self._wn(f'  <option>{option}</option>')
 
         self._w('</select>')
+        if br:
+            self._wbr()
+        self._wn()
+
+    def _generate_radio(self, *args, **kwargs):
+        checker.reset('check', args, kwargs)
+        label = checker.param('label').default(None).istype(str).get()
+        enabled = checker.param('enabled').default(True).istype(bool).get()
+        checked = checker.param('checked').default(False).istype(bool).get()
+        br = checker.param('br').default(True).istype(bool).get()
+
+        self._w(f'<label class="form-check-label"><input class="form-check-input" type="radio" name="radio"')
+
+        if checked:
+            self._w(' checked')
+
+        if not enabled:
+            self._w(' disabled readonly')
+
+        self._w(f'> {label}</label>')
+
         if br:
             self._wbr()
         self._wn()
