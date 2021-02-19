@@ -4,23 +4,48 @@
 - [X] Melhorar visual
 
 - [ ] Fazer testes passar
-- [X] Tirar botão de X da tabela quando estiver disabled - Importante
-- [ ] Todos os campos: required - Importante
+- [x] Tirar botão de X da tabela quando estiver disabled - Importante
+- [x] Todos os campos: required - Importante
 - [ ] Fazer footer no multipleselect - Importante
-- [ ] Alinhar container à direita - Importante
-- [ ] Fazer h1-6 - Importante
+- [x] Alinhar container à direita - Importante
+- [x] Fazer h1-6 - Importante
 - [ ] notes - Importante, demorado
 - [ ] text: Tamanho do campo
 - [ ] Fluxograma
 - [ ] value nos inputs
 - [ ] Identar html gerado
 - [ ] Fazer radio button
+- [ ] Setar título da janela
+- [ ] Navegação para links externos
+- [ ] Melhorar estilos
+- [ ] Tabela: Disabled e alinhamento por coluna
+- [ ] Componentes "complexos" (que são compostos por mais de uma tag) devem ficar numa div
+- [ ] Tabela: linha de footer, com a coluna de actions vazia
+- [ ] Containers: filhos devem herdar o enabled
 
 ## Bugs
 
 - [ ] Quando um container está aninhando em outro container o subcontainer não consegue ficar alinhado à direita
-- [ ] O label do checkbox não fica disabled
+- [x] O label do checkbox não fica disabled
 - [ ] O fundo de um multiselect não fica em cor diferente, apenas o texto, talvez ainda devesse mostrar os botões em outra cor
+
+## Suporte à fluxogramas
+
+Talvez fuja do escopo da ferramenta
+
+- [ ] Funcionalidade de gerar fluxogramas
+  - Ação (se possível amarrar a um formulário)
+  - Decisão
+  - Início
+  - Fim
+
+## Funcionalidade de inclusão de arquivo externo
+
+O Yaml não tem suporte a isso, mas graças ao pyaml isso é possível:
+https://stackoverflow.com/questions/528281/how-can-i-include-a-yaml-file-inside-another
+
+Feito, funcionando, mas ainda não está 100% legal, ver se dá pra melhorar.
+
 
 ## Componentes
 

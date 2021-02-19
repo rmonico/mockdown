@@ -4,7 +4,7 @@ import logger_factory
 import sys
 import yaml
 from . extract_params_from_yaml import extract_params_from_yaml
-
+from . import loader
 
 def parse_command_line():
     parser = argparse.ArgumentParser()
@@ -114,10 +114,15 @@ class MockGenerator(object):
 
     header = '''<html>
 <head>
+  <meta charset="UTF-8"/>
   <style>
   table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
+  }
+
+  table.disabled {
+    border: 1px solid #CCC;
   }
 
   .disabled {
@@ -172,7 +177,7 @@ class MockGenerator(object):
         O paramêtro container se refere ao rootContainer, isto é, é True quando está gerando os fields direto no body
         A string 'container' (como em if 'container' in field) se refere ao field do tipo container
         '''
-        for field in fields:
+        for i, field in enumerate(fields):
             if container:
                 # O seguinte if precisa (muito) ser extraído para uma classe de componente de container
                 if 'container' in field and field['container'][0].get('_kwargs', {}).get('align', 'left') == 'right':
@@ -181,6 +186,10 @@ class MockGenerator(object):
                 else:
                     self._w(MockGenerator.container_header)
 
+                is_last = i == len(fields) - 1
+                if is_last:
+                    default_kwargs['br'] = False
+
             self._generate_field(field, default_kwargs)
 
             if container:
@@ -188,7 +197,9 @@ class MockGenerator(object):
 
     def _generate_field(self, field, kwargs_defaults={}):
         fieldKinds = {
-            'br': lambda *args, **kwargs: self._wbrn(),
+            # TODO Remove esta tag, isso não se enquadra na ideia de simplicidade
+            # 'br': lambda *args, **kwargs: self._wbrn(),
+            'br': lambda *args, **kwargs: self._w(''),
             'span': self._generate_span,
             'header': self._generate_header,
             'text': self._generate_text,
@@ -201,6 +212,7 @@ class MockGenerator(object):
             'container': self._generate_container,
             'textarea': self._generate_textarea,
             'table': self._generate_table,
+            'link': self._generate_anchor,
         }
 
         for kind, generator in fieldKinds.items():
@@ -217,11 +229,15 @@ class MockGenerator(object):
     def _generate_span(self, *args, **kwargs):
         checker.reset('span', args, kwargs)
         label = checker.param('label').default(None).istype(str).get()
+        styles = checker.param('styles').default(None).istype(str).get()
         br = checker.param('br').default(True).istype(bool).get()
 
-        self._span(label)
+        _styles = styles.split(',') if styles else []
+
+        self._span(label, _styles)
         if br:
             self._wbr()
+
         self._wn()
 
     def _generate_header(self, *args, **kwargs):
@@ -230,7 +246,7 @@ class MockGenerator(object):
         label = checker.param('label').default(None).istype(str).get()
         br = checker.param('br').default(True).istype(bool).get()
 
-        self._wn(f'<h{level}>{label}</h{level}>{"<br/>" if br else ""}')
+        self._wn(f'<h{level}>{label}</h{level}>{"<br/><br/>" if br else ""}')
 
     # def _generate_text(self, label=None, placeholder=None, br=True):
     def _generate_text(self, *args, **kwargs):
@@ -239,8 +255,9 @@ class MockGenerator(object):
         enabled = checker.param('enabled').default(True).istype(bool).get()
         placeholder = checker.param('placeholder').default(None).istype(str).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
-        self._span(label)
+        self._span(label, required=required, enabled=enabled)
         if label:
             self._wbrn()
         self._w('<input')
@@ -249,7 +266,10 @@ class MockGenerator(object):
 
         if not enabled:
             self._w(' disabled readonly')
-        self._wbrn('/>')
+        self._w('/>')
+
+        if br:
+            self._wbr()
 
     # def _generate_finder(self, label=None, placeholder=None, br=True):
     def _generate_finder(self, *args, **kwargs):
@@ -258,11 +278,14 @@ class MockGenerator(object):
         enabled = checker.param('enabled').default(True).istype(bool).get()
         placeholder = checker.param('placeholder').default(None).istype(str).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
-        self._span(label)
+        self._span(label, required=required, enabled=enabled)
         self._input(enabled, placeholder)
         self._img('magnifying-glass')
-        self._wbrn()
+        if br:
+            self._wbr()
+        self._wn()
 
     # def _generate_select(self, options, label=None, br=True):
     def _generate_select(self, *args, **kwargs):
@@ -271,8 +294,9 @@ class MockGenerator(object):
         enabled = checker.param('enabled').default(True).istype(bool).get()
         options = checker.param('options').isNotNone().istype(list).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
-        self._span(label)
+        self._span(label, required=required, enabled=enabled)
         self._wbrn()
         self._w('<select')
 
@@ -295,6 +319,7 @@ class MockGenerator(object):
         enabled = checker.param('enabled').default(True).istype(bool).get()
         checked = checker.param('checked').default(False).istype(bool).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
         self._w(f'<label class="form-check-label"><input class="form-check-input" type="radio" name="radio"')
 
@@ -304,7 +329,10 @@ class MockGenerator(object):
         if not enabled:
             self._w(' disabled readonly')
 
-        self._w(f'> {label}</label>')
+        if required and enabled:
+            self._w(f'> {label} *</label>')
+        else:
+            self._w(f'> {label}</label>')
 
         if br:
             self._wbr()
@@ -318,12 +346,25 @@ class MockGenerator(object):
         checked = checker.param('checked').default(False).istype(bool).get()
         br = checker.param('br').default(True).istype(bool).get()
 
-        self._w(f'<input type="checkbox" checked="{checked}"')
+        self._w(f'<input type="checkbox"')
+
+        if checked:
+            self._w(f' checked="checked"')
+
 
         if not enabled:
             self._w(' disabled readonly')
 
-        self._w(f'> {label}</input>' if label else '/>')
+        if not label:
+            self._w('/>')
+
+        else:
+            self._w(f'><label')
+
+            if not enabled:
+                self._w(' class="disabled"')
+
+            self._w(f'> {label}</label></input>')
 
         # self._span(label)
         if br:
@@ -336,20 +377,23 @@ class MockGenerator(object):
         columns = checker.param('columns').isNotNone().istype(dict).get()
         label = checker.param('label').default(None).istype(str).get()
         enabled = checker.param('enabled').default(True).istype(bool).get()
+        editable = checker.param('editable').default(False).istype(bool).get()
         placeholder = checker.param('placeholder').default(None).istype(str).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
-        self._span(label)
+        self._span(label, required=required, enabled=enabled)
         self._wbrn()
         if enabled:
             self._input(enabled, placeholder)
             self._img('plus')
             self._wbrn()
-        self._table(columns, enabled, br=br)
+
+        self._table(columns, enabled, br=br, editable=editable)
 
     # def _generate_button(self, text, br=True):
     def _generate_button(self, *args, **kwargs):
-        colors = {'blue': 'primary', 'green': 'success', 'yellow': 'warning', 'red': 'danger'}
+        colors = {'blue': 'primary', 'green': 'success', 'yellow': 'warning', 'red': 'danger', 'gray': 'secondary'}
         checker.reset('button', args, kwargs)
         text = checker.param('text').isNotNone().istype(str).get()
         enabled = checker.param('enabled').default(True).istype(bool).get()
@@ -392,7 +436,7 @@ class MockGenerator(object):
         if title:
             self._wn(f'  <legend>{title}</legend>')
 
-        self._generate_fields(args, br=direction == 'vertical')
+        self._generate_fields(args, br=direction == 'vertical' and br)
 
         self._w(f'</{tag}>')
 
@@ -408,8 +452,9 @@ class MockGenerator(object):
         label = checker.param('label').default(None).istype(str).get()
         enabled = checker.param('enabled').default(True).istype(bool).get()
         br = checker.param('br').default(True).istype(bool).get()
+        required = checker.param('required').default(True).istype(bool).get()
 
-        self._span(label)
+        self._span(label, required=required, enabled=enabled)
         self._w(f'<textarea')
         self._property(rows=4, cols=50, placeholder=placeholder)
         if not enabled:
@@ -417,6 +462,7 @@ class MockGenerator(object):
         self._w('></textarea>')
         if br:
             self._wbr()
+
         self._wn()
 
     # def _generate_table(self, columns, title=None, br=True):
@@ -429,7 +475,14 @@ class MockGenerator(object):
 
         self._table(columns, enabled, title=title, br=br)
 
-    def _table(self, columns, enabled, title=None, br=True):
+    def _generate_anchor(self, *args, **kwargs):
+        checker.reset('anchor', args, kwargs)
+        href = checker.param('href').default(None).istype(str).get()
+        br = checker.param('br').default(True).istype(bool).get()
+
+        self._wbrn(f'<a href="{href}">{href}</a>')
+
+    def _table(self, columns, enabled, title=None, br=True, editable=False):
         self._w('<table')
         if not enabled:
             self._w(' class="disabled"')
@@ -454,23 +507,41 @@ class MockGenerator(object):
                 cell = value[row]
 
                 self._w(f'    <td>')
+                if editable:
+                    self._w('<div>')
                 if type(cell) == dict:
                     self._generate_fields([cell], br=False)
                 else:
                     self._w(str(cell))
+                if editable:
+                    self._img('pencil')
+                    self._w('</div>')
                 self._wn(f'</td>')
 
             if enabled:
                 self._w('    <td>')
-                self._img('delete')
+                self._img('circle-x')
                 self._wn('</td>')
             self._wn('  </tr>')
 
         self._wbrn('</table>')
 
-    def _span(self, label):
+    def _span(self, label, required=True, enabled=True, style=[]):
         if label:
-            self._w(f'<span>{label}</span>')
+            self._w('<span')
+            if len(style) > 0:
+                self._w(' style="')
+                if 'overstrike' in style:
+                    self._w('text-decoration: line-through;')
+                self._w('"')
+
+            if not enabled:
+                self._w(' class="disabled"')
+
+            self._w(f'>{label}')
+            if required and enabled:
+                self._w(' *')
+            self._w(f'</span>')
 
     def _input(self, enabled, placeholder):
         self._w('<input')
@@ -521,7 +592,7 @@ def main():
     """
     logger.debug('args: ' + str(args))
 
-    input = yaml.load(args.input, Loader=yaml.FullLoader)
+    input = yaml.load(args.input, Loader=loader.Loader)
 
     generator = MockGenerator(input, args.output)
 

@@ -1,15 +1,27 @@
 - header:
     label: Complete mockdown example
     level: 1
-    _comment: _comments field are ignored
+    _comment: _comment field are ignored
     _comment: 'Tip: extract openiconic to this folder (https://useiconic.com/open)'
 
 - span:
     label: Free text
 
+- span:
+    label: Text can be overstrike, more styles to be added
+    style: overstrike
+
 - text:
     label: Text field
     placeholder: A text field
+
+- text:
+    label: Unrequired field
+    required: False
+    placeholder: A text field
+
+- container:
+    !include container_file.yaml
 
 - text:
     label: Text sem placeholder
@@ -60,7 +72,7 @@
     - button:
         text: Cancelar
         color: red
-        _comment: "'color' pode ser blue (default), green, yellow ou red"
+        _comment: "'color' pode ser blue (default), green, yellow, red or gray"
 
 - container:
     - _kwargs:

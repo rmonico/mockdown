@@ -1,0 +1,27 @@
+- fluxo:
+  - action: Criar treinamento
+    performer: Solicitante
+
+  - action: Validar treinamento
+    performer: Consultor
+
+  - decision: Treinamento válidado?
+      - no: 2
+        - action: Revisar
+          performer: Solicitante
+
+        - goto: Validar treinamento
+
+      - yes: 1
+        - action: Confirmação e multiplicador
+          performer: Solicitante
+
+        - action: Seleção de participantes
+          performer: Consultor
+
+        - action: Cotação de passagens e hospedagem
+
+        - action: Disparo de OSs complementares
+
+        - finish: success
+
